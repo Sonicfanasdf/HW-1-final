@@ -1,1 +1,17 @@
-Error: The array is empty, cannot find minimum.
+Minimum Value: 2
+Maximum Value: 98
+Range: 96
+Size: 10
+Sum: 417
+Mean: 41.7
+Median: 34.5
+Standard Deviation: 37.9592
+Variance: 1440.9
+Midrange: 50
+Interquartile Range (IQR): 77
+Sum of Squares: 12968.1
+Mean Absolute Deviation (MAD): 33.3
+Root Mean Square (RMS): 55.0972
+Standard Error of the Mean: 12.0037
+Coefficient of Variation: 0.910292%
+Relative Standard Deviation: 91.0292%

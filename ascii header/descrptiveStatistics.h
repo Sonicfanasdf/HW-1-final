@@ -125,7 +125,7 @@ double calculateStandardDeviation(int* arrayInts, int count) {
 		sumOfSquares += (arrayInts[i] - mean) * (arrayInts[i] - mean);
 	}
 
-	return sqrt(sumOfSquares / count - 1);
+	return sqrt(sumOfSquares / (count - 1));
 }
 
 int findSum(int* arrayInts, int count) {
@@ -392,7 +392,7 @@ void findOutliers(int* arrayInts, int count) {
 	double lowerFence = q1 - 1.5 * iqr;
 	double upperFence = q3 + 1.5 * iqr;
 
-	cout << "Outliers in the dataset: ";
+	cout << "\nOutliers in the dataset: ";
 
 	bool hasOutliers = false;
 	for (int i = 0; i < count; ++i) {
@@ -406,7 +406,7 @@ void findOutliers(int* arrayInts, int count) {
 		cout << "No outliers found.";
 	}
 
-	cout << endl;
+	cout << endl << endl;
 }
 
 double findSumOfSquares(int* arrayInts, int count) {
@@ -481,7 +481,7 @@ double findCoefficientOfVariation(int* arrayInts, int count, double standardDevi
 		throw std::runtime_error("Mean is zero, cannot calculate coefficient of variation.");
 	}
 
-	double coefficientOfVariation = (standardDeviation / mean) * 100;  // as a percentage
+	double coefficientOfVariation = (standardDeviation / mean) ;  // as a percentage
 	return coefficientOfVariation;
 }
 
@@ -744,7 +744,7 @@ int descriptiveStatistics() {
 			
 			try {
 				findOutliers(arrayInts, count);
-				cout << "\nThe outliers of the given data set is: " << findOutliers << endl << endl;
+				
 			}
 			catch (const std::runtime_error& e) {
 				cerr << e.what() << endl;
@@ -754,96 +754,90 @@ int descriptiveStatistics() {
 
 		case 'Q': // sum of squares
 
-			system("cls");
+			
 			try {
 				double sumOfSquaresVal = findSumOfSquares(arrayInts, count);
-				cout << "The sum of squares for the given data set is: " << sumOfSquaresVal << endl;
+				cout << "\nThe sum of squares for the given data set is: " << sumOfSquaresVal << endl << endl;
 			}
 			catch (const std::runtime_error& e) {
 				cerr << e.what() << endl;
 			}
-			system("pause");
-			system("cls");
+			
 			break;
 
 		case 'R': // mean absolute deviation
 
-			system("cls");
+			
 			try {
 				double mad = findMeanAbsoluteDeviation(arrayInts, count);
-				std::cout << "The Mean Absolute Deviation (MAD) of the given data set is: " << mad << std::endl;
+				std::cout << "\nThe Mean Absolute Deviation (MAD) of the given data set is: " << mad << std::endl << endl;
 			}
 			catch (const std::runtime_error& e) {
 				std::cerr << e.what() << std::endl;
 			}
-			system("pause");
-			system("cls");
+			
 			break;
 
 		case 'S': // root mean square
 
-			system("cls");
+			
 			try {
 				double rms = findRootMeanSquare(arrayInts, count);
-				std::cout << "The Root Mean Square (RMS) of the given data set is: " << rms << std::endl;
+				std::cout << "\nThe Root Mean Square (RMS) of the given data set is: " << rms << std::endl << endl;
 			}
 			catch (const std::runtime_error& e) {
 				std::cerr << e.what() << std::endl;
 			}
-			system("pause");
-			system("cls");
+			
 			break;
 
 		case 'T': // standard error of the mean
 
-			system("cls");
+			
 			try {
 				double stdDev = calculateStandardDeviation(arrayInts, count);
 				double standardError = findStandardError(arrayInts, count, stdDev);
-				std::cout << "The Standard Error of the Mean for the given data set is: " << standardError << std::endl;
+				std::cout << "\nThe Standard Error of the Mean for the given data set is: " << standardError << std::endl << endl;
 			}
 			catch (const std::runtime_error& e) {
 				std::cerr << e.what() << std::endl;
 			}
-			system("pause");
-			system("cls");
+			
 			break;
 
 		case 'U': // coefficient of variation
 
-			system("cls");
+			
 			try {
 				double mean = findMean(arrayInts, count);
 				double stdDev = calculateStandardDeviation(arrayInts, count);
 				double coefficientOfVariation = findCoefficientOfVariation(arrayInts, count, stdDev, mean);
-				std::cout << "The Coefficient of Variation for the given data set is: " << coefficientOfVariation << "%" << std::endl;
+				std::cout << "\nThe Coefficient of Variation for the given data set is: " << coefficientOfVariation << std::endl << endl;
 			}
 			catch (const std::runtime_error& e) {
 				std::cerr << e.what() << std::endl;
 			}
-			system("pause");
-			system("cls");
+			
 			break;
 
 		case 'V': // relative standard deviation
 
-			system("cls");
+			
 			try {
 				double mean = findMean(arrayInts, count);
 				double stdDev = calculateStandardDeviation(arrayInts, count);
 				double relativeStandardDeviation = findRelativeStandardDeviation(arrayInts, count, stdDev, mean);
-				std::cout << "The Relative Standard Deviation for the given data set is: " << relativeStandardDeviation << "%" << std::endl;
+				std::cout << "\nThe Relative Standard Deviation for the given data set is: " << relativeStandardDeviation << "%" << std::endl << endl;
 			}
 			catch (const std::runtime_error& e) {
 				std::cerr << e.what() << std::endl;
 			}
-			system("pause");
-			system("cls");
+			
 			break;
 
 		case 'W': // display all results and write to an output text file
 		{
-			system("cls");
+			
 			std::ofstream outputFile("DescriptiveStatisticsResults.txt");
 			if (!outputFile) {
 				cerr << "Error opening output file." << endl;
@@ -851,22 +845,92 @@ int descriptiveStatistics() {
 			}
 			try {
 				// writing to file (and this will overwrite the file if it already exists)
-				int minVal = findMinimum(arrayInts, count);
+
+				displayArray(arrayInts, count); // A
+
+				int minVal = findMinimum(arrayInts, count); // B
 				outputFile << "Minimum Value: " << minVal << endl;
-				cout << "Minimum Value: " << minVal << endl;
+				cout << "Minimum Value: " << minVal << endl << endl;
 
-				int maxVal = findMaximum(arrayInts, count);
+				int maxVal = findMaximum(arrayInts, count); // C
 				outputFile << "Maximum Value: " << maxVal << endl;
-				cout << "Maximum Value: " << maxVal << endl;
+				cout << "Maximum Value: " << maxVal << endl << endl;
 
-				int range = findRange(arrayInts, count);
+				int range = findRange(arrayInts, count); // D
 				outputFile << "Range: " << range << endl;
-				cout << "Range: " << range << endl;
+				cout << "Range: " << range << endl << endl;
 
-				outputFile << "Size: " << count << endl;
-				cout << "Size: " << count << endl;
+				outputFile << "Size: " << count << endl; // E 
+				cout << "Size: " << count << endl << endl;
 
-				cout << "All results have been written to 'DescriptiveStatisticsResults.txt'." << endl;
+				int sum = findSum(arrayInts, count); // F 
+				outputFile << "Sum: " << sum << endl;
+				cout << "Sum: " << sum << endl << endl;
+
+				double mean = findMean(arrayInts, count); // G 
+				outputFile << "Mean: " << mean << endl;
+				cout << "Mean: " << mean << endl << endl;
+
+				double median = findMedian(arrayInts, count); // H
+				outputFile << "Median: " << median << endl;
+				cout << "Median: " << median << endl << endl;
+
+				findMode(arrayInts, count);	 // J
+				cout << endl;
+
+				double stdDev = calculateStandardDeviation(arrayInts, count); // K
+				outputFile << "Standard Deviation: " << stdDev << endl;
+				cout << "Standard Deviation: " << stdDev << endl << endl;
+
+				double variance = findVariance(arrayInts, count); // L
+				outputFile << "Variance: " << variance << endl;
+				cout << "Variance: " << variance << endl << endl;
+
+				double midrangeVal = findMidrange(arrayInts, count); // M
+				outputFile << "Midrange: " << midrangeVal << endl;
+				cout << "Midrange: " << midrangeVal << endl << endl;
+
+				findQuartiles(arrayInts, count); // N 
+
+				cout << endl;
+
+				double iqr = findInterquartileRange(arrayInts, count); // O
+				outputFile << "Interquartile Range (IQR): " << iqr << endl;
+				cout << "Interquartile Range (IQR): " << iqr << endl << endl;
+
+				findOutliers(arrayInts, count); // P
+
+				cout << endl;
+
+				double sumOfSquaresVal = findSumOfSquares(arrayInts, count); // Q
+				outputFile << "Sum of Squares: " << sumOfSquaresVal << endl;
+				cout << "Sum of Squares: " << sumOfSquaresVal << endl << endl;
+
+				double mad = findMeanAbsoluteDeviation(arrayInts, count); // R
+				outputFile << "Mean Absolute Deviation (MAD): " << mad << endl;
+				cout << "Mean Absolute Deviation (MAD): " << mad << endl << endl;
+
+				double rms = findRootMeanSquare(arrayInts, count); // S
+				outputFile << "Root Mean Square (RMS): " << rms << endl;
+				cout << "Root Mean Square (RMS): " << rms << endl << endl;
+
+				double standardError = findStandardError(arrayInts, count, stdDev); // T
+				outputFile << "Standard Error of the Mean: " << standardError << endl;
+				cout << "Standard Error of the Mean: " << standardError << endl << endl;
+
+				double coefficientOfVariation = findCoefficientOfVariation(arrayInts, count, stdDev, mean); // U
+				outputFile << "Coefficient of Variation: " << coefficientOfVariation << "%" << endl;
+				cout << "Coefficient of Variation: " << coefficientOfVariation << "%" << endl << endl;
+
+				double relativeStandardDeviation = findRelativeStandardDeviation(arrayInts, count, stdDev, mean); // V
+				outputFile << "Relative Standard Deviation: " << relativeStandardDeviation << "%" << endl;
+				cout << "Relative Standard Deviation: " << relativeStandardDeviation << "%" << endl << endl;
+
+				findFrequencies(arrayInts, count); // I (moved to last to make output look nicer for user)
+
+				cout << endl;
+
+				cout << "All results have been written to 'DescriptiveStatisticsResults.txt'." << endl << endl;;
 			}
 			catch (const runtime_error& e) {
 				cerr << e.what() << endl;
@@ -874,8 +938,7 @@ int descriptiveStatistics() {
 			}
 
 			outputFile.close();
-			system("pause");
-			system("cls");
+			
 		}
 		break;
 

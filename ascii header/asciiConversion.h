@@ -14,7 +14,8 @@ void readFile(string fileText, string fileName);
 void menu();
 void chooseOption();
 
-
+//Precondition: None
+//Postcondition: Displays the asciiMenu and gives user the option to progress to other menus
 void asciiMenu() //ascii conversion menu
 {
 	char option;
@@ -94,6 +95,7 @@ void asciiMenu() //ascii conversion menu
 		cout << endl;
 	} while (true);
 }
+//Postcondition: 
 void writeFile(string textString, string& fileName) //writes to a binary file
 {
 	ofstream binaryFile;
